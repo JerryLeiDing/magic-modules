@@ -1,0 +1,110 @@
+base_url: projects/{{project}}/locations/{{location}}/serviceInstances/{{serviceinstance}}/applicationEnvironments
+create_url: projects/{{project}}/locations/{{location}}/serviceInstances/{{serviceinstance}}/applicationEnvironments?applicationEnvironmentId={{application_environment_id}}
+self_link: projects/{{project}}/locations/{{location}}/serviceInstances/{{serviceinstance}}/applicationEnvironments/{{application_environment_id}}
+id_format: projects/{{project}}/locations/{{location}}/serviceInstances/{{serviceinstance}}/applicationEnvironments/{{application_environment_id}}
+import_format:
+  - projects/{{project}}/locations/{{location}}/serviceInstances/{{serviceinstance}}/applicationEnvironments/{{application_environment_id}}
+name: ApplicationEnvironment
+description: An ApplicationEnvironment contains shared configuration that may be referenced by multiple SparkApplications.
+update_verb: PATCH
+update_mask: true
+autogen_async: false
+properties:
+  - name: name
+    type: String
+    description: "Identifier. Fields 1-6 should exist for all declarative friendly resources
+      per\naip.dev/148 The name of the application environment.\nFormat:\nprojects/{project}/locations/{location}/serviceInstances/{service_instance}/applicationEnvironments/{application_environment_id} "
+    output: true
+  - name: uid
+    type: String
+    description: "Output only. System generated unique identifier for this application
+      environment,\nformatted as UUID4. "
+    output: true
+  - name: displayName
+    type: String
+    description: 'Optional. User-provided human-readable name to be used in user interfaces. '
+  - name: createTime
+    type: String
+    description: 'Output only. The timestamp when the resource was created. '
+    output: true
+  - name: updateTime
+    type: String
+    description: 'Output only. The timestamp when the resource was most recently updated. '
+    output: true
+  - name: labels
+    type: KeyValueLabels
+    output:
+    api_name:
+    description: "Optional. The labels to associate with this application environment.
+      Labels may be\nused for filtering and billing tracking. "
+    min_version:
+    ignore_write:
+    update_verb:
+    update_url:
+    immutable:
+  - name: annotations
+    type: KeyValueAnnotations
+    output:
+    api_name:
+    description: "Optional. The annotations to associate with this application environment.
+      Annotations\nmay be used to store client information, but are not used by the
+      server. "
+    min_version:
+    ignore_write:
+    update_verb:
+    update_url:
+    immutable:
+  - name: sparkApplicationEnvironmentConfig
+    type: NestedObject
+    properties:
+      - name: defaultProperties
+        type: KeyValuePairs
+        output:
+        api_name:
+        description: "Optional. A map of default Spark properties to apply to workloads
+          in this application\nenvironment. These defaults may be overridden by per-application\nproperties. "
+        min_version:
+        ignore_write:
+        update_verb:
+        update_url:
+        immutable:
+      - name: defaultVersion
+        type: String
+        description: "Optional. The default Dataproc version to use for applications submitted
+          to this\napplication environment "
+    description: 'Represents the SparkApplicationEnvironmentConfig. '
+  - name: namespace
+    type: String
+    description: "Optional. The name of the namespace in which to create this ApplicationEnvironment.\nThis
+      namespace must already exist in the cluster "
+parameters:
+  - name: location
+    type: String
+    description: 'Resource ID segment making up resource `name`. It identifies the resource
+      within its parent collection as described in https://google.aip.dev/122. See documentation
+      for resource type `dataprocgdc.googleapis.com/ApplicationEnvironment`. '
+    url_param_only: true
+    required: true
+    immutable: true
+  - name: serviceinstance
+    type: String
+    description: 'Resource ID segment making up resource `name`. It identifies the resource
+      within its parent collection as described in https://google.aip.dev/122. See documentation
+      for resource type `dataprocgdc.googleapis.com/ApplicationEnvironment`. '
+    url_param_only: true
+    required: true
+    immutable: true
+  - name: applicationEnvironmentId
+    type: String
+    description: 'Optional. The id of the application environment '
+    url_param_only: true
+    immutable: true
+examples:
+  - name: "dataprocgdc_applicationenvironment_basic"
+    primary_resource_id: "application-environment"
+    vars:
+      application_environment_id: "dp-tf-e2e-application-environment-basic"
+  - name: "dataprocgdc_applicationenvironment"
+    primary_resource_id: "application-environment"
+    vars:
+      application_environment_id: "dp-tf-e2e-application-environment"

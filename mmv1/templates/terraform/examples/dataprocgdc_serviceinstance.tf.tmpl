@@ -1,0 +1,15 @@
+resource "google_dataproc_gdc_service_instance" "{{$.PrimaryResourceId}}" {
+  service_instance_id = "{{index $.Vars "service_instance_id"}}"
+  location        = "us-west2"
+  gdce_cluster {
+      gdce_cluster = "projects/gdce-cluster-monitoring/locations/us-west2/clusters/gdce-prism-prober-ord106"
+  }
+  display_name = "A service instance for a Terraform create test"
+  labels = {
+    "test-label": "label-value"
+  }
+  annotations = {
+    "an_annotation": "annotation_value"
+  }
+}
+
